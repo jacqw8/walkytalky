@@ -7,4 +7,16 @@
         </div>
         <br>
     {% endfor %}
+    <br>
+    {% for post in posts %}
+        {% for post1 in posts1 %}
+            {% if post.title == post1.title %}
+                <h1 style="color: #117964; font-size:60px">Yay! You're free on the same day:</h1>
+                <br>
+                <h1 style="color: #117964; font-size:60px">
+                    {{ post.title }}
+                </h1>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 {% endblock content %}
