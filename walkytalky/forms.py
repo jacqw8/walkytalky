@@ -25,3 +25,13 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+class CalendarForm(FlaskForm):
+    day = StringField('Day', validators=[DataRequired()])
+    input = StringField('Availability', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class CalendarForm2(FlaskForm):
+    removeday = StringField('Day', validators=[DataRequired()])
+    removeinput = StringField('Availability', validators=[DataRequired()])
+    remove = SubmitField('Remove')
