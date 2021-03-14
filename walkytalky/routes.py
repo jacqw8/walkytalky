@@ -103,7 +103,7 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('times'))
 
-@app.route("/friends")
+@app.route("/friends", methods=['GET', 'POST'])
 @login_required
 def friends():
     form = SearchFriend()
@@ -118,10 +118,10 @@ def friends():
         return render_template('friends.html', posts=posts)
     return render_template('search.html', form=form)
 
-@app.route("/friendsavail")
-@login_required
-def friendsavail():
-    pass
+# @app.route("/friendsavail")
+# @login_required
+# def friendsavail():
+#     return render_template('friends.html', posts=posts)
 
 @app.route('/users', methods=['GET'])
 def get_users():
