@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, send_from_
 from walkytalky import app, db, bcrypt
 from walkytalky.forms import RegistrationForm, LoginForm, CalendarForm, CalendarForm2, PostForm, SearchFriend, AddWalksForm
 from flask_login import login_user, current_user, logout_user, login_required
-from walkytalky.models import User, Post
+from walkytalky.models import User, Post, Walk
 from walkytalky import cal
 
 @app.route("/", methods=['GET'])
@@ -72,7 +72,7 @@ def times():
 @app.route("/mywalks")
 @login_required
 def mywalks():
-    posts = Post.query.all()
+    posts = Walk.query.all()
     return render_template('mywalks.html', posts=posts)
 
 @app.route("/updatewalks", methods=['GET', 'POST'])
@@ -80,7 +80,7 @@ def mywalks():
 def updatewalks():
     form = AddWalksForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        post = Walk(title=form.title.data, content=form.content.data, author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your walk has been created!', 'success')
