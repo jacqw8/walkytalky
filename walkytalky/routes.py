@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, send_from_directory, Response
 from walkytalky import app, db, bcrypt
-from walkytalky.forms import RegistrationForm, LoginForm
+from walkytalky.forms import RegistrationForm, LoginForm, CalendarForm
 from flask_login import login_user, current_user, logout_user, login_required
 from walkytalky.models import User
 
@@ -46,3 +46,9 @@ def logout():
 def about():
     return render_template('about.html')
 
+@app.route('/avail', methods=['GET', 'POST'])
+def avail():
+    form = CalendarForm()
+    if form.validate_on_submit():
+        pass
+    return render_template('avail.html', form=form)
