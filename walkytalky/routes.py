@@ -114,15 +114,10 @@ def friends():
         posts2 = Post.query.all()
         posts = list()
         for post in posts2:
-            if post.author == friend:
+            if post.author.id == friend.id:
                 posts.append(post)
         return render_template('friends.html', posts=posts)
     return render_template('search.html', form=form)
-
-# @app.route("/friendsavail")
-# @login_required
-# def friendsavail():
-#     return render_template('friends.html', posts=posts)
 
 @app.route('/users', methods=['GET'])
 def get_users():
