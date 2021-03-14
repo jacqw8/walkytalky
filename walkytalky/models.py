@@ -26,3 +26,6 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+
+class Avail(db.Model):
+    times_free = db.Column(db.String(120))
