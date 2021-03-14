@@ -43,8 +43,8 @@ class PostForm(FlaskForm):
 
 class AddWalksForm(FlaskForm):
     title = StringField('Walked with', validators=[DataRequired()])
-    location = StringField('Where', validators=[DataRequired()])
-    day = StringField('When', validators=[DataRequired()])
+    location = StringField('Location', validators=[DataRequired()])
+    day = StringField('Date', validators=[DataRequired()])
     start = StringField('Start Time', validators=[DataRequired()])
     end = StringField('End Time', validators=[DataRequired()])
     distance = StringField('Distance', validators=[DataRequired()])

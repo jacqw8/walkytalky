@@ -3,7 +3,12 @@
 <h1 style="color: darkblue; font-size:60px">My Walks</h1>
     {% for post in posts %}
         <div style="font-size:30px; text-align:left; padding: 20px; box-shadow: 0 0 3px black; line-height: 40px; color: white">
-            <div style="color: darkblue">{{ post.title }}: {{ post.content }}</div>
+            <div style="color: darkblue">Walked with: @{{ post.title }} <br>
+                Location: {{ post.location }} <br>
+                Date: {{ post.day }} <br>
+                Start Time: {{ post.start }} <br>
+                End Time: {{ post.end }} <br>
+                Total Distance: {{ post.distance }}</div>
         </div>
         <br>
     {% endfor %}
