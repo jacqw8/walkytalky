@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, send_from_directory, Response
 from walkytalky import app, db, bcrypt
-from walkytalky.forms import RegistrationForm, LoginForm, CalendarForm
+from walkytalky.forms import RegistrationForm, LoginForm, CalendarForm, CalendarForm2
 from flask_login import login_user, current_user, logout_user, login_required
 from walkytalky.models import User
 from walkytalky import cal
@@ -63,3 +63,15 @@ def avail():
 def myavail():
     times = cal.check_cal(timesd)
     return render_template('mytime.html', times=times)
+
+@app.route('/deleteavail', methods=['GET', 'POST'])
+def editavail():
+    form = CalendarForm2()
+    if form.validate_on_submit():
+        day = form.removeday.data
+        time = form.removeinput.data
+        remove = {'day': day, 'beg': time}
+        if remove in timesd:
+            timesd.remove(remove)
+        return redirect(url_for('myavail'))
+    return render_template('editavail.html', form=form)

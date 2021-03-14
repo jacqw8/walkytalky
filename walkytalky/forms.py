@@ -29,5 +29,9 @@ class LoginForm(FlaskForm):
 class CalendarForm(FlaskForm):
     day = StringField('Day', validators=[DataRequired()])
     input = StringField('Availability', validators=[DataRequired()])
-    # end = StringField('End Availability', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+class CalendarForm2(FlaskForm):
+    removeday = StringField('Day', validators=[DataRequired()])
+    removeinput = StringField('Availability', validators=[DataRequired()])
+    remove = SubmitField('Remove')
