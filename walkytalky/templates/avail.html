@@ -6,6 +6,21 @@
             <fieldset class="form-group">
 
                 <div class="form-group">
+                    {{ form.day.label(class="form-control-label", style="font-size: 50px") }}
+
+                    {% if form.day.errors %}
+                        {{ form.day(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.day.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.day(class="form-control form=control-lg") }}
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
                     {{ form.input.label(class="form-control-label", style="font-size: 50px") }}
 
                     {% if form.input.errors %}
@@ -21,21 +36,6 @@
 
                 </div>
 
-                <div class="form-group">
-                    {{ form.end.label(class="form-control-label", style="font-size: 50px") }}
-
-                    {% if form.end.errors %}
-                        {{ form.end(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.end.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.end(class="form-control form=control-lg") }}
-                    {% endif %}
-
-                </div>
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}

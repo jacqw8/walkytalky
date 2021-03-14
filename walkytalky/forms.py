@@ -27,6 +27,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class CalendarForm(FlaskForm):
-    input = StringField('Start Availability', validators=[DataRequired()])
-    end = StringField('End Availability', validators=[DataRequired()])
+    day = StringField('Day', validators=[DataRequired()])
+    input = StringField('Availability', validators=[DataRequired()])
+    # end = StringField('End Availability', validators=[DataRequired()])
     submit = SubmitField('Submit')

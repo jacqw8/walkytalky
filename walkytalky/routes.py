@@ -3,6 +3,7 @@ from walkytalky import app, db, bcrypt
 from walkytalky.forms import RegistrationForm, LoginForm, CalendarForm
 from flask_login import login_user, current_user, logout_user, login_required
 from walkytalky.models import User
+from walkytalky import cal
 
 @app.route("/", methods=['GET'])
 def index():
@@ -46,18 +47,19 @@ def logout():
 def about():
     return render_template('about.html')
 
-times = []
+timesd = []
 @app.route('/avail', methods=['GET', 'POST'])
 def avail():
     form = CalendarForm()
     if form.validate_on_submit():
         time = {}
+        time['day'] = form.day.data
         time['beg'] = form.input.data
-        time['end'] = form.end.data
-        times.append(time)
+        timesd.append(time)
         return redirect(url_for('myavail'))
     return render_template('avail.html', form=form)
 
 @app.route('/myavail')
 def myavail():
+    times = cal.check_cal(timesd)
     return render_template('mytime.html', times=times)
