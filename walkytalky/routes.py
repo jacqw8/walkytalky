@@ -68,6 +68,12 @@ def times():
             abort(403)
     return render_template('times.html', posts=posts)
 
+@app.route("/mywalks")
+@login_required
+def mywalks():
+    posts = Post.query.all()
+    return render_template('mywalks.html', posts=posts)
+
 @app.route("/post/<int:post_id>")
 @login_required
 def post(post_id):
