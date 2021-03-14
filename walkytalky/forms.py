@@ -51,5 +51,5 @@ class AddWalksForm(FlaskForm):
     submit = SubmitField('Add Walk')
 
 class SearchFriend(FlaskForm):
-    search = StringField('Search', validators=[DataRequired()])
+    search = StringField("Friend's username:", validators=[DataRequired()])
     submit = SubmitField('Submit')

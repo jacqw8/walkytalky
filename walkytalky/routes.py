@@ -110,13 +110,20 @@ def friends():
     form = SearchFriend()
     if form.validate_on_submit():
         friend_username = form.search.data
-        friend = User.query.filter_by(username=friend_username)
-        posts2 = Post.query.all()
-        posts = list()
-        for post in posts2:
-            if post.author.id == friend.id:
-                posts.append(post)
-        return render_template('friends.html', posts=posts)
+        try:
+            friend = User.query.filter_by(username=friend_username).first()
+            posts2 = Post.query.all()
+            posts = list()
+            for post in posts2:
+                if post.author.username == friend.username:
+                    posts.append(post)
+            posts1 = list()
+            for post in posts2:
+                if post.author == current_user:
+                    posts1.append(post)
+            return render_template('friends.html', posts=posts, posts1=posts1)
+        except:
+            flash("Doesn't exist!", 'danger')
     return render_template('search.html', form=form)
 
 @app.route('/users', methods=['GET'])
