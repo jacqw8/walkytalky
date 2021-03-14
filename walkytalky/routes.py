@@ -80,7 +80,8 @@ def mywalks():
 def updatewalks():
     form = AddWalksForm()
     if form.validate_on_submit():
-        post = Walk(title=form.title.data, content=form.content.data, author=current_user)
+        post = Walk(title=form.title.data, location=form.location.data, day=form.day.data, start=form.start.data,
+                    end=form.end.data, distance=form.distance.data, author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your walk has been created!', 'success')
