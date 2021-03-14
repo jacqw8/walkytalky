@@ -40,3 +40,7 @@ class PostForm(FlaskForm):
     title = StringField('Day', validators=[DataRequired()])
     content = StringField('Availability', validators=[DataRequired()])
     submit = SubmitField('Update')
+
+class SearchFriend(FlaskForm):
+    search = StringField('Search', validators=[DataRequired()])
+    submit = SubmitField('Submit')
