@@ -6,7 +6,7 @@ from walkytalky.models import User
 
 @app.route("/", methods=['GET'])
 def index():
-    return render_template('index.html', title='Index')
+    return render_template('about.html', title='Index')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -40,7 +40,7 @@ def login():
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('about'))
 
 @app.route('/home')
 def about():
