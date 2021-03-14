@@ -37,6 +37,6 @@ class CalendarForm2(FlaskForm):
     remove = SubmitField('Remove')
 
 class PostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    content = StringField('Content', validators=[DataRequired()])
+    title = StringField('Day', validators=[DataRequired()])
+    content = StringField('Availability', validators=[DataRequired()])
     submit = SubmitField('Update')

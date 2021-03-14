@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, send_from_directory, Response
 from walkytalky import app, db, bcrypt
-from walkytalky.forms import RegistrationForm, LoginForm, CalendarForm, CalendarForm2
+from walkytalky.forms import RegistrationForm, LoginForm, CalendarForm, CalendarForm2, PostForm
 from flask_login import login_user, current_user, logout_user, login_required
 from walkytalky.models import User, Post
 from walkytalky import cal
@@ -75,3 +75,15 @@ def editavail():
             timesd.remove(remove)
         return redirect(url_for('myavail'))
     return render_template('editavail.html', form=form)
+
+@app.route("/updateavail", methods=['GET', 'POST'])
+@login_required
+def updateavail():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('myavail'))
+    return render_template('updateavail.html', form=form)
