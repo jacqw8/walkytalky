@@ -62,10 +62,11 @@ def updateavail():
 @app.route("/times")
 @login_required
 def times():
-    posts = Post.query.all()
-    for post in posts:
-        if post.author != current_user:
-            abort(403)
+    posts2 = Post.query.all()
+    posts = list()
+    for post in posts2:
+        if post.author == current_user:
+            posts.append(post)
     return render_template('times.html', posts=posts)
 
 @app.route("/mywalks")
@@ -78,8 +79,6 @@ def mywalks():
 @login_required
 def post(post_id):
     post = Post.query.get_or_404(post_id)
-    if post.author != current_user:
-        abort(403)
     return render_template('post.html', title=post.title, post=post)
 
 @app.route("/post/<int:post_id>/delete", methods=['POST'])
