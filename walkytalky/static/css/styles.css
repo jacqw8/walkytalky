@@ -594,6 +594,14 @@ pre code {
   margin-left: -1.5rem;
 }
 
+.walkdisplay{
+  border-radius: 25px;
+  background: #f6d4eb;
+  padding: 20px;
+  width: 20rem;
+  height: 11rem;
+}
+
 .no-gutters {
   margin-right: 0;
   margin-left: 0;

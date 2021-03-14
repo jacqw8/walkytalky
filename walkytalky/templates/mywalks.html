@@ -2,7 +2,7 @@
 {% block content %}
 <h1 style="color: darkblue; font-size:60px">My Walks</h1>
     {% for post in posts %}
-        <div style="font-size:30px; text-align:left; padding: 20px; box-shadow: 0 0 3px black; line-height: 40px; color: white">
+        <div class="walkdisplay">
             <div style="color: darkblue">Walked with: @{{ post.title }} <br>
                 Location: {{ post.location }} <br>
                 Date: {{ post.day }} <br>
@@ -12,5 +12,5 @@
         </div>
         <br>
     {% endfor %}
-<button><a href="{{ url_for('updatewalks') }}">Add a walk!</a></button>
+<button class="btn btn-dark"><a href="{{ url_for('updatewalks') }}">Add a walk!</a></button>
 {% endblock content %}
