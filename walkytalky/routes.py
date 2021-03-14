@@ -135,8 +135,8 @@ def get_users():
     all_users = jsonify(users=[i.serialize for i in users])
     return all_users
 
-@app.route('/request')
-def request():
+@app.route('/request1')
+def request1():
     username = user[0]
     email = user[1]
     user.pop()
