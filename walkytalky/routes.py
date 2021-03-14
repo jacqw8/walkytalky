@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, send_from_
 from walkytalky import app, db, bcrypt
 from walkytalky.forms import RegistrationForm, LoginForm
 from flask_login import login_user, current_user, logout_user, login_required
+from walkytalky.models import User
 
 @app.route("/", methods=['GET'])
 def index():
