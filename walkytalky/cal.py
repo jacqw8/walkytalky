@@ -19,3 +19,6 @@ def del_cal(list1, remove):
             list2.remove(remove)
 
     return list2
+
+def friends(friend):
+    pass

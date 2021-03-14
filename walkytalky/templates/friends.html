@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1 style="color: darkblue; font-size:60px">Friends</h1>
+    {% for friend in friends %}
+        <div style="font-size:40px; text-align:left; padding: 20px; box-shadow: 0 0 3px black; line-height: 40px; color: white">
+            <div style="color: darkblue">Hi</div>
+        </div>
+    {% endfor %}
+{% endblock content %}

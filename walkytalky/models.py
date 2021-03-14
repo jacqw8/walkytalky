@@ -14,8 +14,17 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
 
-def __repr__(self):
-    return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+    def __repr__(self):
+        return f"User('{self.username}', '{self.email}')"
+
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email
+        }
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
