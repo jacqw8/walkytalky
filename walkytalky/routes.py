@@ -47,34 +47,34 @@ def logout():
 def about():
     return render_template('about.html')
 
-timesd = []
-@app.route('/avail', methods=['GET', 'POST'])
-def avail():
-    form = CalendarForm()
-    if form.validate_on_submit():
-        time = {}
-        time['day'] = form.day.data
-        time['beg'] = form.input.data
-        timesd.append(time)
-        return redirect(url_for('myavail'))
-    return render_template('avail.html', form=form)
-
-@app.route('/myavail')
-def myavail():
-    times = cal.check_cal(timesd)
-    return render_template('mytime.html', times=times)
-
-@app.route('/deleteavail', methods=['GET', 'POST'])
-def editavail():
-    form = CalendarForm2()
-    if form.validate_on_submit():
-        day = form.removeday.data
-        time = form.removeinput.data
-        remove = {'day': day, 'beg': time}
-        if remove in timesd:
-            timesd.remove(remove)
-        return redirect(url_for('myavail'))
-    return render_template('editavail.html', form=form)
+# timesd = []
+# @app.route('/avail', methods=['GET', 'POST'])
+# def avail():
+#     form = CalendarForm()
+#     if form.validate_on_submit():
+#         time = {}
+#         time['day'] = form.day.data
+#         time['beg'] = form.input.data
+#         timesd.append(time)
+#         return redirect(url_for('myavail'))
+#     return render_template('avail.html', form=form)
+#
+# @app.route('/myavail')
+# def myavail():
+#     times = cal.check_cal(timesd)
+#     return render_template('mytime.html', times=times)
+#
+# @app.route('/deleteavail', methods=['GET', 'POST'])
+# def editavail():
+#     form = CalendarForm2()
+#     if form.validate_on_submit():
+#         day = form.removeday.data
+#         time = form.removeinput.data
+#         remove = {'day': day, 'beg': time}
+#         if remove in timesd:
+#             timesd.remove(remove)
+#         return redirect(url_for('myavail'))
+#     return render_template('editavail.html', form=form)
 
 @app.route("/updateavail", methods=['GET', 'POST'])
 @login_required
@@ -85,5 +85,10 @@ def updateavail():
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
-        return redirect(url_for('myavail'))
+        return redirect(url_for('times'))
     return render_template('updateavail.html', form=form)
+
+@app.route("/times")
+def times():
+    posts = Post.query.all()
+    return render_template('times.html', posts=posts)
