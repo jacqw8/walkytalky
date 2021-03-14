@@ -84,14 +84,17 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('times'))
 
+user = []
 @app.route("/friends", methods=['GET', 'POST'])
 @login_required
 def friends():
     form = SearchFriend()
     if form.validate_on_submit():
         friend_username = form.search.data
+        user.append(friend_username)
         try:
             friend = User.query.filter_by(username=friend_username).first()
+            user.append(friend.email)
             posts2 = Post.query.all()
             posts = list()
             for post in posts2:
@@ -131,3 +134,16 @@ def get_users():
     users = db.session.query(User).all()
     all_users = jsonify(users=[i.serialize for i in users])
     return all_users
+
+@app.route('/request')
+def request():
+    username = user[0]
+    email = user[1]
+    user.pop()
+    user.pop()
+    posts = []
+    dict1 = {}
+    dict1['user'] = username
+    dict1['email'] = email
+    posts.append(dict1)
+    return render_template('request.html', posts=posts)

@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% for post in posts %}
+    <h1>Hi {{ post.user }}! </h1>
+    <p>I would like to go on a walk with you!</p>
+    <p>Send to: {{post.email}}</p>
+{% endfor %}
+{% endblock content %}
