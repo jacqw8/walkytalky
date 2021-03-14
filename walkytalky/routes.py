@@ -103,16 +103,22 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('times'))
 
-# @app.route("/friends")
-# @login_required
-# def friends():
-#     form = SearchFriend()
-#     if form.validate_on_submit():
-#         friends = form.search.data
-#         return render_template('friends.html', friends=friends)
-#     return render_template('search.html', form=form)
+@app.route("/friends")
+@login_required
+def friends():
+    form = SearchFriend()
+    if form.validate_on_submit():
+        friend_username = form.search.data
+        friend = User.query.filter_by(username=friend_username)
+        posts2 = Post.query.all()
+        posts = list()
+        for post in posts2:
+            if post.author == friend:
+                posts.append(post)
+        return render_template('friends.html', posts=posts)
+    return render_template('search.html', form=form)
 
-all_users = []
+
 @app.route('/users', methods=['GET'])
 def get_users():
     users = db.session.query(User).all()
