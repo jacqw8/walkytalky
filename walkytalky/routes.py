@@ -46,9 +46,18 @@ def logout():
 def about():
     return render_template('about.html')
 
+times = []
 @app.route('/avail', methods=['GET', 'POST'])
 def avail():
     form = CalendarForm()
     if form.validate_on_submit():
-        pass
+        time = {}
+        time['beg'] = form.input.data
+        time['end'] = form.end.data
+        times.append(time)
+        return redirect(url_for('myavail'))
     return render_template('avail.html', form=form)
+
+@app.route('/myavail')
+def myavail():
+    return render_template('mytime.html', times=times)
