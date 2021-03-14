@@ -41,6 +41,15 @@ class PostForm(FlaskForm):
     content = StringField('Availability', validators=[DataRequired()])
     submit = SubmitField('Update')
 
+class AddWalksForm(FlaskForm):
+    title = StringField('Walked with', validators=[DataRequired()])
+    location = StringField('Where', validators=[DataRequired()])
+    day = StringField('When', validators=[DataRequired()])
+    start = StringField('Start Time', validators=[DataRequired()])
+    end = StringField('End Time', validators=[DataRequired()])
+    distance = StringField('Distance', validators=[DataRequired()])
+    submit = SubmitField('Add Walk')
+
 class SearchFriend(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])
     submit = SubmitField('Submit')

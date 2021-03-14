@@ -74,6 +74,19 @@ def mywalks():
     posts = Post.query.all()
     return render_template('mywalks.html', posts=posts)
 
+@app.route("/updatewalks", methods=['GET', 'POST'])
+@login_required
+def updatewalks():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your walk has been created!', 'success')
+        return redirect(url_for('mywalks'))
+    return render_template('updatewalks.html', form=form)
+
+
 @app.route("/post/<int:post_id>")
 @login_required
 def post(post_id):
