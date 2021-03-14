@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, send_from_directory, Response, jsonify, abort
 from walkytalky import app, db, bcrypt
-from walkytalky.forms import RegistrationForm, LoginForm, CalendarForm, CalendarForm2, PostForm, SearchFriend
+from walkytalky.forms import RegistrationForm, LoginForm, CalendarForm, CalendarForm2, PostForm, SearchFriend, AddWalksForm
 from flask_login import login_user, current_user, logout_user, login_required
 from walkytalky.models import User, Post
 from walkytalky import cal
@@ -78,7 +78,7 @@ def mywalks():
 @app.route("/updatewalks", methods=['GET', 'POST'])
 @login_required
 def updatewalks():
-    form = PostForm()
+    form = AddWalksForm()
     if form.validate_on_submit():
         post = Post(title=form.title.data, content=form.content.data, author=current_user)
         db.session.add(post)
