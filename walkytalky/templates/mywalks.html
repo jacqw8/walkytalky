@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1 style="color: darkblue; font-size:60px">My Walks</h1>
-    <div class="portfolio-item mx-auto">
-        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x">words words words</i></div>
+    {% for post in posts %}
+        <div style="font-size:30px; text-align:left; padding: 20px; box-shadow: 0 0 3px black; line-height: 40px; color: white">
+            <a style="color: darkblue" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}: {{ post.content }}</a>
         </div>
-
-    </div>
+        <br>
+    {% endfor %}
 <button><a href="{{ url_for('updatewalks') }}">Add a walk!</a></button>
 {% endblock content %}

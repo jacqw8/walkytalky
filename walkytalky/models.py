@@ -39,7 +39,11 @@ class Post(db.Model):
 class Walk(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.String(120), nullable=False)
+    location = db.Column(db.String(120), nullable=False)
+    day = db.Column(db.String(120), nullable=False)
+    start = db.Column(db.String(120), nullable=False)
+    end = db.Column(db.String(120), nullable=False)
+    distance = db.Column(db.String(120), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
