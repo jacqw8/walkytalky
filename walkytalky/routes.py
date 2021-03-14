@@ -69,26 +69,6 @@ def times():
             posts.append(post)
     return render_template('times.html', posts=posts)
 
-@app.route("/mywalks")
-@login_required
-def mywalks():
-    posts = Walk.query.all()
-    return render_template('mywalks.html', posts=posts)
-
-@app.route("/updatewalks", methods=['GET', 'POST'])
-@login_required
-def updatewalks():
-    form = AddWalksForm()
-    if form.validate_on_submit():
-        post = Walk(title=form.title.data, location=form.location.data, day=form.day.data, start=form.start.data,
-                    end=form.end.data, distance=form.distance.data, author=current_user)
-        db.session.add(post)
-        db.session.commit()
-        flash('Your walk has been created!', 'success')
-        return redirect(url_for('mywalks'))
-    return render_template('updatewalks.html', form=form)
-
-
 @app.route("/post/<int:post_id>")
 @login_required
 def post(post_id):
@@ -126,16 +106,28 @@ def friends():
             flash("Doesn't exist!", 'danger')
     return render_template('search.html', form=form)
 
+@app.route("/mywalks")
+@login_required
+def mywalks():
+    posts = Walk.query.all()
+    return render_template('mywalks.html', posts=posts)
+
+@app.route("/updatewalks", methods=['GET', 'POST'])
+@login_required
+def updatewalks():
+    form = AddWalksForm()
+    if form.validate_on_submit():
+        post = Walk(title=form.title.data, location=form.location.data, day=form.day.data, start=form.start.data,
+                    end=form.end.data, distance=form.distance.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your walk has been created!', 'success')
+        return redirect(url_for('mywalks'))
+    return render_template('updatewalks.html', form=form)
+
+
 @app.route('/users', methods=['GET'])
 def get_users():
     users = db.session.query(User).all()
     all_users = jsonify(users=[i.serialize for i in users])
     return all_users
-
-# @app.route('/post_user', methods=['POST'])
-# def post_user():
-#     data = request.get_json()
-#     user = User(data['username'], data['email'])
-#     db.session.add(user)
-#     db.session.commit()
-#     return jsonify(**data)
