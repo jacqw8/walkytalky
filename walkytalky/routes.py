@@ -118,6 +118,10 @@ def friends():
         return render_template('friends.html', posts=posts)
     return render_template('search.html', form=form)
 
+@app.route("/friendsavail")
+@login_required
+def friendsavail():
+    pass
 
 @app.route('/users', methods=['GET'])
 def get_users():
