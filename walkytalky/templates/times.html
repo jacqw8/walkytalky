@@ -3,7 +3,7 @@
 <h1 style="color: darkblue; font-size:60px">My Availability</h1>
     {% for post in posts %}
         <div style="font-size:30px; text-align:left; padding: 20px; box-shadow: 0 0 3px black; line-height: 40px; color: white">
-            <div style="color: darkblue">{{ post.title }}: {{ post.content }}</div>
+            <a style="color: darkblue" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}: {{ post.content }}</a>
         </div>
         <br>
     {% endfor %}
